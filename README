@@ -1,0 +1,10 @@
+klortho.pl
+
+A simple Dancer application that dispenses advice from Klortho. To see it in
+action visit - http://dave.org.uk/klortho/. There's also an RSS feed of
+random advice at http://dave.org.uk/klortho/rss/.
+
+For more information about Dancer, see http://perldancer.org/.
+
+For the origin of advice from Klortho, see
+https://groups.google.com/d/topic/comp.lang.perl.misc/LJUxoLbNQKw/
