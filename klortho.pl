@@ -3,8 +3,11 @@
 use strict;
 use warnings;
 
+use FindBin '$Bin';
+
 use Dancer2;
 use XML::RSS;
+use lib "$Bin/lib";
 use Klortho;
 
 get '/' => sub {
