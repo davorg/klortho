@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Dancer;
+use Dancer2;
 use XML::RSS;
 use Klortho;
 
