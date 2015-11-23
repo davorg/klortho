@@ -1,0 +1,13 @@
+<html>
+  <head>
+    <title>Advice From Klortho</title>
+    <style>
+p {
+  font-size: 7em;
+}
+    </style>
+  </head>
+  <body>
+    <p>[% advice %]</p>
+  </body>
+</html>

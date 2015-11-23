@@ -8,7 +8,7 @@ use XML::RSS;
 use Klortho;
 
 get '/' => sub {
-    return Klortho::advice(params->{n});
+    template 'index', { advice => Klortho::advice(params->{n}) };
 };
 
 get '/rss' => sub {
