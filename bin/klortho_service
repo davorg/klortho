@@ -1,0 +1,31 @@
+#!/usr/bin/env perl
+
+use warnings;
+use strict;
+use Daemon::Control;
+ 
+use Cwd qw(abs_path);
+use File::Basename;
+ 
+Daemon::Control->new({
+  name      => "Klotho",
+  lsb_start => '$syslog $remote_fs',
+  lsb_stop  => '$syslog',
+  lsb_sdesc => 'Advice from Klortho',
+  lsb_desc  => 'Klortho knows programming. Listen to Klortho',
+  path      => abs_path($0),
+ 
+  program      => '/usr/bin/starman',
+  program_args => [ '--workers', 10, '-l', ':5001',
+                    dirname(abs_path($0)) . '/app.psgi' ],
+ 
+  user  => 'davorg',
+  group => 'psacln',
+ 
+  pid_file    => '/tmp/klortho.pid',
+  stderr_file => '/tmp/klortho.err',
+  stdout_file => '/tmp/klortho.out',
+ 
+  fork => 2,
+})->run;
+
