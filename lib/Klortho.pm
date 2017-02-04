@@ -12,7 +12,7 @@ get '/' => sub {
     template 'index', { advice => Klortho::Util::advice(params->{n}) };
 };
 
-get '/rss' => sub {
+get qw[/rss/?] => sub {
     content_type 'text/xml';
     
     my $advice = Klortho::Util::advice(params->{n});
