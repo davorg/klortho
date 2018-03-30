@@ -12,11 +12,16 @@ get '/' => sub {
     template 'index', { advice => Klortho::Util::advice(params->{n}) };
 };
 
+get qr[/(\d+)] => sub {
+    my ($n) = splat;
+    template 'index', { advice => Klortho::Util::advice($n) };
+};
+
 get qw[/rss/?] => sub {
     content_type 'text/xml';
-    
+
     my $advice = Klortho::Util::advice(params->{n});
-    
+
     my $rss = XML::RSS->new(version => '1.0');
     $rss->channel(
         title => 'Advice from Klortho',
@@ -27,13 +32,12 @@ get qw[/rss/?] => sub {
     my ($n) = $advice =~ /(\d+)/;
 
     my $link = "http://dave.org.uk/klortho/?n=$n";
-    
+
     $rss->add_item(
         title => $advice,
         description => $advice,
         link => $link,
     );
-    
+
     return $rss->as_string;
 };
-

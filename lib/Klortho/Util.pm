@@ -7,9 +7,10 @@ chomp(my @klortho = <Klortho::Util::DATA>);
 
 sub advice {
     my $n = shift;
-    
+
     return random_advice() unless $n;
-    
+    return random_advice() unless $klortho[$n - 11900];
+
     return $klortho[$n - 11900];
 }
 
@@ -40,7 +41,7 @@ __DATA__
 #11917 Read.  Learn.  Evolve.
 #11918 Well, then get one that *does* do auto-indent.  You can't do good work with bad tools.
 #11919 No.  You must believe the ERROR MESSAGE.  You MUST believe the error message.
-#11920 The error message is the Truth.  The error message is God.  
+#11920 The error message is the Truth.  The error message is God.
 #11921 It could be anything.  Too bad you didn't bother to diagnose the error, huh?
 #11922 You don't suppress error messages, you dumbass, you PAY ATTENTION and try to understand them.
 #11923 Never catch a signal except as a last resort.
@@ -70,10 +71,10 @@ __DATA__
 #11947 You know, this sort of thing is amenable to experimental observation.
 #11948 Perhaps your veeblefitzer is clogged.
 #11949 What happens when you try?
-#11950 Now you are just being superstitious.  
+#11950 Now you are just being superstitious.
 #11951 Your question has exceeded the system limit for pronouns in a single sentence.  Please dereference and try again.
 #11952 In my experience that is a bad strategy, because the people who ask such questions are the ones who paste the answer into their program without understanding it and then complain that it `does not work'.
-#11953 Of course, this is a heuristic, which is a fancy way of saying that it doesn't work. 
+#11953 Of course, this is a heuristic, which is a fancy way of saying that it doesn't work.
 #11954 If your function is written correctly, it will handle an empty array the same way as a nonempty array.
 #11955 When in doubt, use brute force.
 #11956 Well, it might be more intuitive that way, but it would also be useless.
