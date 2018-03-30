@@ -8,19 +8,12 @@ use XML::RSS;
 
 use Klortho::Util;
 
-get '/' => sub {
-    template 'index', { advice => Klortho::Util::advice(params->{n}) };
-};
-
-get qr[/(\d+)] => sub {
-    my ($n) = splat;
-    template 'index', { advice => Klortho::Util::advice($n) };
-};
-
-get qw[/rss/?] => sub {
+get qr[^/rss(/(\d+))?] => sub {
     content_type 'text/xml';
 
-    my $advice = Klortho::Util::advice(params->{n});
+    my (undef, $n) = splat();
+    $n //= query_parameters->get('n');
+    my $advice = Klortho::Util::advice($n);
 
     my $rss = XML::RSS->new(version => '1.0');
     $rss->channel(
@@ -29,7 +22,7 @@ get qw[/rss/?] => sub {
         description => 'Advice from Klortho',
     );
 
-    my ($n) = $advice =~ /(\d+)/;
+    ($n) = $advice =~ /(\d+)/;
 
     my $link = "http://dave.org.uk/klortho/?n=$n";
 
@@ -40,4 +33,10 @@ get qw[/rss/?] => sub {
     );
 
     return $rss->as_string;
+};
+
+get qr[^/(\d+)?] => sub {
+    my ($n) = splat();
+    $n //= query_parameters->get('n');
+    template 'index', { advice => Klortho::Util::advice($n) };
 };
