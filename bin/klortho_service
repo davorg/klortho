@@ -3,12 +3,14 @@
 use warnings;
 use strict;
 use Daemon::Control;
+
+use ENV::Util -load_dotenv;
  
 use Cwd qw(abs_path);
 use File::Basename;
  
 Daemon::Control->new({
-  name      => "Klotho",
+  name      => ucfirst lc $ENV{KLORTHO_APP_NAME},
   lsb_start => '$syslog $remote_fs',
   lsb_stop  => '$syslog',
   lsb_sdesc => 'Advice from Klortho',
@@ -19,12 +21,12 @@ Daemon::Control->new({
   program_args => [ '--workers', 10, '-l', ':5001',
                     dirname(abs_path($0)) . '/app.psgi' ],
  
-  user  => 'davorg',
-  group => 'psacln',
+  user  => $ENV{KLORTHO_OWNER},
+  group => $ENV{KLORTHO_GROUP},
  
-  pid_file    => '/tmp/klortho.pid',
-  stderr_file => '/tmp/klortho.err',
-  stdout_file => '/tmp/klortho.out',
+  pid_file    => "/tmp/$ENV{KLORTHO_APP_NAME}.pid",
+  stderr_file => "$ENV{KLORTHO_LOG_ROOT}/error.log",
+  stdout_file => "$ENV{KLORTHO_LOG_ROOT}/output.log",
  
   fork => 2,
 })->run;
