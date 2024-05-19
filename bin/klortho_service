@@ -24,7 +24,7 @@ Daemon::Control->new({
   user  => $ENV{KLORTHO_OWNER},
   group => $ENV{KLORTHO_GROUP},
  
-  pid_file    => "/tmp/$ENV{KLORTHO_APP_NAME}.pid",
+  pid_file    => "/var/run/$ENV{KLORTHO_APP_NAME}.pid",
   stderr_file => "$ENV{KLORTHO_LOG_DIR}/error.log",
   stdout_file => "$ENV{KLORTHO_LOG_DIR}/output.log",
  
