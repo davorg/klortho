@@ -1,16 +1,13 @@
 <html>
   <head>
     <title>Advice From Klortho</title>
-    <style>
-body {
-  margin: 5rem;
-}
-p {
-  font-size: 7rem;
-}
-    </style>
+    <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
-    <p>[% advice %]</p>
+    <p class="advice">[% advice %]<br>
+      <span class="link"><a href="/?n=[% n %]">LINK</a></span></p>
+    <div class="nav">
+      <a href="/wtf">WTF</a>
+    </div>
   </body>
 </html>

@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>Advice From Klortho</title>
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <div class="wtf">
+      <h1>This Is Advice From Klortho</h1>
+      <ul>
+        <li>If you haven't heard of Klortho's advice see
+          <a href="https://groups.google.com/d/topic/comp.lang.perl.misc/LJUxoLbNQKw/">this USENET post</a>
+          from the mists of time</li>
+        <li>We thank <a href="https://blog.plover.com/">Mark Dominus</a> for bringing us ths this advice</li>
+        <li>This is programming advice</li>
+        <li>You will receive random advice from Klortho</li>
+        <li>Unless you add <code>?n=xxxxx</code> to the URL</li>
+        <li>There is also an <a href="/rss">RSS feed</a> of random advice</li>
+      </ul>
+    </div>
+    <div class="nav">
+      <a href="/">HOME</a>
+    </div>
+  </body>
+</html>

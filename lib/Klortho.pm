@@ -8,6 +8,10 @@ use XML::RSS;
 
 use Klortho::Util;
 
+get '/wtf' => sub {
+    template 'wtf';
+};
+
 get qr[^/rss(/(\d+))?] => sub {
     content_type 'text/xml';
 
@@ -38,5 +42,10 @@ get qr[^/rss(/(\d+))?] => sub {
 get qr[^/(\d+)?] => sub {
     my ($n) = splat();
     $n //= query_parameters->get('n');
-    template 'index', { advice => Klortho::Util::advice($n) };
+    my $advice = Klortho::Util::advice($n);
+    ($n) = $advice =~ /(\d+)/;
+    template 'index', { 
+      n => $n,
+      advice => $advice,
+    };
 };

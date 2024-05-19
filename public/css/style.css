@@ -1,0 +1,25 @@
+body {
+  margin: 5rem;
+}
+p.advice {
+  font-size: 7rem;
+}
+.nav {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-size: 2rem;
+}
+a {
+  color: #000;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+.link {
+  font-size: 2rem;
+}
+.wtf {
+  font-size: 3rem;
+}
