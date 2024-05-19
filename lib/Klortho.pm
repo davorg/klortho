@@ -18,13 +18,13 @@ get qr[^/rss(/(\d+))?] => sub {
     my $rss = XML::RSS->new(version => '1.0');
     $rss->channel(
         title => 'Advice from Klortho',
-        link  => 'https://dave.org.uk/klortho/rss/',
+        link  => 'https://klortho.perlhacks.com/rss/',
         description => 'Advice from Klortho',
     );
 
     ($n) = $advice =~ /(\d+)/;
 
-    my $link = "https://dave.org.uk/klortho/?n=$n";
+    my $link = "https://klortho.perlhacks.com/?n=$n";
 
     $rss->add_item(
         title => $advice,
