@@ -2,8 +2,11 @@
   <head>
     <title>Advice From Klortho</title>
     <style>
+body {
+  margin: 5rem;
+}
 p {
-  font-size: 7em;
+  font-size: 7rem;
 }
     </style>
   </head>
