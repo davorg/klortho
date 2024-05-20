@@ -1,5 +1,14 @@
 <html>
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HRNPLNZ65S"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-HRNPLNZ65S');
+    </script>
     <title>Advice From Klortho</title>
     <link rel="stylesheet" href="/css/style.css">
   </head>
@@ -15,6 +24,8 @@
         <li>You will receive random advice from Klortho</li>
         <li>Unless you add <code>?n=xxxxx</code> to the URL</li>
         <li>There is also an <a href="/rss">RSS feed</a> of random advice</li>
+        <li>Turned into <a href="https://github.com/davorg/klortho">code</a> by
+          <a href="https://links.davecross.co.uk/">davorg</a></li>
       </ul>
     </div>
     <div class="nav">
