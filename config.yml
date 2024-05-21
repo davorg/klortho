@@ -7,7 +7,7 @@ appname: "Klortho"
 
 # The default layout to use for your application (located in
 # views/layouts/main.tt)
-# layout: "main"
+layout: "page"
 
 # when the charset is set to UTF-8 Dancer2 will handle for you
 # all the magic of encoding and decoding. You should not care
@@ -50,3 +50,6 @@ engines:
 #      cookie_name: eshop.session
 #      is_secure: 1
 #      is_http_only: 1
+
+GA4: G-EY48YV1H0M
+

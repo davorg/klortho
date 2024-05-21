@@ -1,0 +1,20 @@
+<html>
+  <head>
+[% IF settings.GA4 -%]
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HRNPLNZ65S"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '[% settings.GA4 %]');
+    </script>
+[% END -%]
+    <title>Advice From Klortho</title>
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+[% content %]
+  </body>
+</html>
