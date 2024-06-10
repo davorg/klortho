@@ -13,6 +13,7 @@
 [% END -%]
     <title>Advice From Klortho</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="canonical" href="[% request.uri_basae %]/[% IF n %]?n=[% n; END %]">
   </head>
   <body>
 [% content %]
