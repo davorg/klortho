@@ -18,7 +18,7 @@ Daemon::Control->new({
   path      => abs_path($0),
  
   program      => '/usr/bin/starman',
-  program_args => [ '--workers', 10, '-l', ":$ENV{KLORTHO_APP_PORT}",
+  program_args => [ '--workers', ($ENV{KLORTHO_WORKER_COUNT} // 10), '-l', ":$ENV{KLORTHO_APP_PORT}",
                     dirname(abs_path($0)) . '/bin/app.psgi' ],
  
   user  => $ENV{KLORTHO_OWNER},
