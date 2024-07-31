@@ -8,6 +8,18 @@ use ENV::Util -load_dotenv;
  
 use Cwd qw(abs_path);
 use File::Basename;
+
+my @program_args;
+if ($ENV{KLORTHO_WORKER_COUNT}) {
+  push @program_args, '--workers', $ENV{KLORTHO_WORKER_COUNT};
+}
+if ($ENV{KLORTHO_APP_PORT}) {
+  push @program_args, '-l', ":$ENV{KLORTHO_APP_PORT}";
+}
+if ($ENV{KLORTHO_APP_PRELOAD}) {
+  push @program_args, '--preload-app';
+}
+push @program_args, dirname(abs_path($0)) . '/bin/app.psgi';
  
 Daemon::Control->new({
   name      => ucfirst lc $ENV{KLORTHO_APP_NAME},
@@ -18,8 +30,7 @@ Daemon::Control->new({
   path      => abs_path($0),
  
   program      => '/usr/bin/starman',
-  program_args => [ '--workers', ($ENV{KLORTHO_WORKER_COUNT} // 10), '-l', ":$ENV{KLORTHO_APP_PORT}",
-                    dirname(abs_path($0)) . '/bin/app.psgi' ],
+  program_args => \@program_args,
  
   user  => $ENV{KLORTHO_OWNER},
   group => $ENV{KLORTHO_GROUP},
