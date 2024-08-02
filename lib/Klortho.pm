@@ -22,18 +22,16 @@ get qr[^/rss(/(\d+))?] => sub {
     my $rss = XML::RSS->new(version => '1.0');
     $rss->channel(
         title => 'Advice from Klortho',
-        link  => 'https://klortho.perlhacks.com/rss/',
+        link  => request->uri_for('/rss'),
         description => 'Advice from Klortho',
     );
 
     ($n) = $advice =~ /(\d+)/;
 
-    my $link = "https://klortho.perlhacks.com/?n=$n";
-
     $rss->add_item(
         title => $advice,
         description => $advice,
-        link => $link,
+        link => request->uri_for('/rss', { n => $n }),
     );
 
     return $rss->as_string;
