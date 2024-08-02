@@ -1,8 +1,8 @@
 klortho.pl
 
 A simple Dancer application that dispenses advice from Klortho. To see it in
-action visit - https://klortho.davecross.com/. There's also an RSS feed of
-random advice at https://klortho.davecross.com/rss/.
+action visit - https://klortho.perlhacks.com/. There's also an RSS feed of
+random advice at https://klortho.perlhacks.com/rss/.
 
 For more information about Dancer, see http://perldancer.org/.
 
