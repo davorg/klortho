@@ -1,4 +1,4 @@
-klortho.pl
+# klortho.pl
 
 A simple Dancer application that dispenses advice from Klortho. To see it in
 action visit - https://klortho.perlhacks.com/. There's also an RSS feed of
