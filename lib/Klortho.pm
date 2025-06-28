@@ -3,6 +3,8 @@ package Klortho;
 use strict;
 use warnings;
 
+our $VERSION = '1.0.0';
+
 use Dancer2;
 use XML::RSS;
 
