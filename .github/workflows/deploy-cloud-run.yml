@@ -42,7 +42,18 @@ jobs:
 
       - name: Deploy to Cloud Run
         run: |
-          gcloud run deploy ${{ secrets.SERVICE_NAME }}             --region=${{ env.REGION }}             --project=${{ secrets.GCP_PROJECT }}             --image="${IMAGE}"             --platform=managed             --allow-unauthenticated             --port=8080             --memory=256Mi             --max-instances=2             --concurrency=20             --set-env-vars=PLACK_ENV=production             --ingress=all
+          gcloud run deploy ${{ secrets.SERVICE_NAME }} \
+                     --region=${{ env.REGION }} \
+                     --project=${{ secrets.GCP_PROJECT }} \
+                     --image="${IMAGE}" \
+                     --platform=managed  \
+                     --allow-unauthenticated \
+                     --port=8080 \
+                     --memory=512Mi \
+                     --max-instances=2 \
+                     --concurrency=20 \
+                     --set-env-vars=PLACK_ENV=production \
+                     --ingress=all
 
       # Uncomment if/when you add Secret Manager entries like APP_ENV, APP_BASE_URL
       # - name: Set runtime secrets (optional)
