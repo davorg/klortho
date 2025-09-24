@@ -1,0 +1,40 @@
+name: Deploy Klortho to Cloud Run (europe-west2)
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Google Auth (OIDC)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_ID_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+      - name: Set up gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Artifact Registry auth
+        run: gcloud auth configure-docker europe-west2-docker.pkg.dev --quiet
+
+      - name: Build & Push container
+        env:
+          IMAGE: europe-west2-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/apps/${{ secrets.SERVICE_NAME }}:${{ github.sha }}
+        run: |
+          docker build -t "$IMAGE" .
+          docker push "$IMAGE"
+          echo "IMAGE=$IMAGE" >> $GITHUB_ENV
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy ${{ secrets.SERVICE_NAME }}             --region=europe-west2             --project=${{ secrets.GCP_PROJECT }}             --image="${IMAGE}"             --platform=managed             --allow-unauthenticated             --port=8080             --memory=256Mi             --max-instances=2             --set-env-vars=PLACK_ENV=production             --ingress=all
