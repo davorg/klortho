@@ -1,16 +1,20 @@
-name: Deploy Klortho to Cloud Run (europe-west2)
+name: Deploy Klortho to Cloud Run (europe-west1)
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main, master ]
   workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
+    env:
+      REGION: europe-west1
+      REPO: apps
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,16 +29,22 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2
 
       - name: Configure Artifact Registry auth
-        run: gcloud auth configure-docker europe-west2-docker.pkg.dev --quiet
+        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
 
       - name: Build & Push container
         env:
-          IMAGE: europe-west2-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/apps/${{ secrets.SERVICE_NAME }}:${{ github.sha }}
+          IMAGE: ${{ env.REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ env.REPO }}/${{ secrets.SERVICE_NAME }}:${{ github.sha }}
         run: |
+          echo "Building $IMAGE"
           docker build -t "$IMAGE" .
           docker push "$IMAGE"
           echo "IMAGE=$IMAGE" >> $GITHUB_ENV
 
       - name: Deploy to Cloud Run
         run: |
-          gcloud run deploy ${{ secrets.SERVICE_NAME }}             --region=europe-west2             --project=${{ secrets.GCP_PROJECT }}             --image="${IMAGE}"             --platform=managed             --allow-unauthenticated             --port=8080             --memory=256Mi             --max-instances=2             --set-env-vars=PLACK_ENV=production             --ingress=all
+          gcloud run deploy ${{ secrets.SERVICE_NAME }}             --region=${{ env.REGION }}             --project=${{ secrets.GCP_PROJECT }}             --image="${IMAGE}"             --platform=managed             --allow-unauthenticated             --port=8080             --memory=256Mi             --max-instances=2             --concurrency=20             --set-env-vars=PLACK_ENV=production             --ingress=all
+
+      # Uncomment if/when you add Secret Manager entries like APP_ENV, APP_BASE_URL
+      # - name: Set runtime secrets (optional)
+      #   run: |
+      #     gcloud run services update ${{ secrets.SERVICE_NAME }}       #       --region=${{ env.REGION }}       #       --project=${{ secrets.GCP_PROJECT }}       #       --set-secrets=APP_ENV=APP_ENV:latest,APP_BASE_URL=APP_BASE_URL:latest
