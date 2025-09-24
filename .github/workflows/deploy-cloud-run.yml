@@ -2,7 +2,7 @@ name: Deploy Klortho to Cloud Run (europe-west2)
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   workflow_dispatch:
 
 jobs:
